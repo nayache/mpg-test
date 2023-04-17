@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  couchbase:
+    build:
+      context: ./
+      dockerfile: Dockerfile.db
+    container_name: couchbase
+    ports:
+      - "8091-8094:8091-8094"
+      - "11210:11210"
+    networks:
+      - mpg-network
+
+  api:
+    build:
+      context: ./
+      dockerfile: Dockerfile.api
+    container_name: api
+    ports:
+      - 3000:3000
+    depends_on:
+      - couchbase
+    networks:
+      - mpg-network
+
+networks:
+  mpg-network:

@@ -1,0 +1,181 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "3.0.0",
+        "title": "mpg-test-api",
+        "description": "mpg api documentation"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000"
+        }
+    ] ,
+    "paths": {
+        "/teams/:id/name": {
+            "patch": {
+                "tags": [
+                    "teams"
+                ],
+                "description": "Update name on existing mpg_team",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "required": true,
+                        "name": "id",
+                        "description": "mpg_team id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully update name on mpg_team specified"
+                    },
+                    "400": {
+                        "description": "invalid body arguments",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": "number",
+                                        "message": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "mpg_team not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": "number",
+                                        "message": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/leagues/:id/users": {
+            "get": {
+                "tags": [
+                    "leagues"
+                ],
+                "description": "returns the usernames of the participants in the mpg_league specified by id",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "required": true,
+                        "name": "id",
+                        "description": "mpg_league id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description":"mpg_league users returned successfully"
+                    },
+                    "404": {
+                        "description": "mpg_league not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": "number",
+                                        "message": "string"
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+        },
+        "/leagues": {
+            "post": {
+                "tags": [
+                    "leagues"
+                ],
+                "description": "create mpg_league from the specified informations in the body request",
+                "parameters": [
+                    {
+                        "description": "JSON example of expected values for create mpg_league",
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "default": {
+                                "id": "mpg_league_bpl",
+                                "name": "Premier League",
+                                "description": "road to the UCL",
+                                "adminId": "user_42"
+                            }
+                        }
+                    }
+                ],
+                "components": {
+                    "schema": {
+                        "type": "object", 
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "description": "mpg_league id property"
+                            },
+                            "name": {
+                                "type": "string",
+                                "description": "mpg_league id property"
+                            },
+                            "description": {
+                                "type": "string",
+                                "description": "mpg_league id property"
+                            },
+                            "adminId": {
+                                "type": "string",
+                                "description": "mpg_league id property"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                       "description" : "successfully mpg_league creation"
+                    },
+                    "400": {
+                        "description": "invalid body arguments / user (adminId) not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": "number",
+                                        "message": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "mpg_league already exists",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": "number",
+                                        "message": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
