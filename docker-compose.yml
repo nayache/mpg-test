@@ -6,6 +6,8 @@ services:
       context: ./
       dockerfile: Dockerfile.db
     container_name: couchbase
+    env_file:
+      - .env
     ports:
       - "8091-8094:8091-8094"
       - "11210:11210"
@@ -17,8 +19,10 @@ services:
       context: ./
       dockerfile: Dockerfile.api
     container_name: api
+    env_file:
+      - .env
     ports:
-      - 3000:3000
+      - 3042:3042
     depends_on:
       - couchbase
     networks:

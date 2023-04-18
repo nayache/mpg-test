@@ -7,11 +7,11 @@
     },
     "servers": [
         {
-            "url": "http://localhost:3000"
+            "url": "http://localhost:3042"
         }
-    ] ,
+    ],
     "paths": {
-        "/teams/:id/name": {
+        "/teams/{id}/name": {
             "patch": {
                 "tags": [
                     "teams"
@@ -19,10 +19,23 @@
                 "description": "Update name on existing mpg_team",
                 "parameters": [
                     {
-                        "in": "query",
-                        "required": true,
+                        "description": "mpg_team id",
                         "name": "id",
-                        "description": "mpg_team id"
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "mpg_team name",
+                        "name": "name",
+                        "in": "body",
+                        "required": true,
+                        "schema":
+                        {
+                            "type": "object",
+                            "default": {
+                                "name": "Eredivisie"
+                            }
+                        }
                     }
                 ],
                 "responses": {
@@ -60,7 +73,7 @@
                 }
             }
         },
-        "/leagues/:id/users": {
+        "/leagues/{id}/users": {
             "get": {
                 "tags": [
                     "leagues"
@@ -68,15 +81,15 @@
                 "description": "returns the usernames of the participants in the mpg_league specified by id",
                 "parameters": [
                     {
-                        "in": "query",
-                        "required": true,
+                        "description": "mpg_league id",
                         "name": "id",
-                        "description": "mpg_league id"
+                        "in": "path",
+                        "required": true
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description":"mpg_league users returned successfully"
+                        "description": "mpg_league users returned successfully"
                     },
                     "404": {
                         "description": "mpg_league not found",
@@ -91,7 +104,6 @@
                                 }
                             }
                         }
-
                     }
                 }
             }
@@ -121,7 +133,7 @@
                 ],
                 "components": {
                     "schema": {
-                        "type": "object", 
+                        "type": "object",
                         "properties": {
                             "id": {
                                 "type": "string",
@@ -144,7 +156,7 @@
                 },
                 "responses": {
                     "201": {
-                       "description" : "successfully mpg_league creation"
+                        "description": "successfully mpg_league creation"
                     },
                     "400": {
                         "description": "invalid body arguments / user (adminId) not found",

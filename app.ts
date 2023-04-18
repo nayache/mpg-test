@@ -1,15 +1,15 @@
 import express from 'express';
 import * as dotenv from "dotenv";
 import 'reflect-metadata';
-import leagueRoutes from './routes/league';
-import teamRoutes from './routes/team';
+import leagueRoutes from './src/routes/league';
+import teamRoutes from './src/routes/team';
 import Container from 'typedi';
-import { DataAccessLayer } from './database/dataAccess';
-import { errorHandler } from './middlewares/errorHandler';
+import { DataAccessLayer } from './src/database/dataAccess';
+import { errorHandler } from './src/middlewares/errorHandler';
 import axios from 'axios';
 import swaggerUi from 'swagger-ui-express';
-import * as swaggerDocument from './swagger.json';
-import { notFound } from './middlewares/notfound';
+import * as swaggerDocument from './docs/swagger.json';
+import { notFound } from './src/middlewares/notfound';
 require("express-async-errors");
 
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
@@ -42,7 +42,7 @@ async function main() {
     await connectDatabase();
     await Container.get(DataAccessLayer).init();
     
-    app.listen(3000, () => console.info("Server run on port 3000"));
+    app.listen(3042, () => console.info("Server run on port 3042"));
     
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

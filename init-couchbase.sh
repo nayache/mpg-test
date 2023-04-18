@@ -1,7 +1,7 @@
 #!/bin/bash
 N1QL_SCRIPT=$(cat script.n1ql)
 
-source .env
+#source .env
 
 
 #couchbase_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' couchbase) 

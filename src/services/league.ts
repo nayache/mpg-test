@@ -25,27 +25,25 @@ interface CreateLeague {
 
 @Service()
 export class LeagueService {
-    constructor(private readonly leagueDal: DataAccessLayer) {
-        console.log('LeagueService instance created()')
-    }
+    constructor(private readonly dataAccess: DataAccessLayer) {}
 
     async leagueExist(leagueId: string): Promise<boolean> {
         return (await this.getLeagueById(leagueId)) ? true : false;
     }
     
     async userExist(userId: string): Promise<boolean> {
-        return (await this.leagueDal.getUserById(userId)) ? true : false;
+        return (await this.dataAccess.getUserById(userId)) ? true : false;
     }
 
     async getLeagueById(leagueId: string): Promise<League | null> {
-        const payload: string | null = await this.leagueDal.getLeagueById(leagueId);
+        const payload: string | null = await this.dataAccess.getLeagueById(leagueId);
         if (!payload)
             return null
         return JSON.parse(payload);
     }
 
     async getUserById(userId: string): Promise<User | null> {
-        const payload: string | null = await this.leagueDal.getUserById(userId);
+        const payload: string | null = await this.dataAccess.getUserById(userId);
         if (!payload)
             return null
         return JSON.parse(payload);
@@ -74,7 +72,7 @@ export class LeagueService {
         const league: League = payload as League;
         league.type = 'mpg_league';
         
-        await this.leagueDal.addLeague(JSON.stringify(league.id), JSON.stringify(league));
+        await this.dataAccess.addLeague(JSON.stringify(league.id), JSON.stringify(league));
     }
 
 }

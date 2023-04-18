@@ -1,7 +1,6 @@
 FROM couchbase:latest
 
 COPY ./init-couchbase.sh /init-couchbase.sh
-COPY ../.env /.env
 COPY ./script.n1ql /script.n1ql
 
 CMD ["bash", "init-couchbase.sh"]

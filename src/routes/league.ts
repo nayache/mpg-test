@@ -2,7 +2,7 @@ import { Request, Response, Router } from "express";
 import { LeagueService, User } from "../services/league";
 import { Result, ValidationError, body, validationResult } from "express-validator"
 import Container from "typedi";
-import { HttpException } from "../services/httpException";
+import { HttpException } from "../exceptions/httpException";
 require("express-async-errors");
 
 interface UserDto {

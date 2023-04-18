@@ -1,6 +1,6 @@
 import { Bucket, Cluster, ConnectOptions, QueryResult, connect } from "couchbase";
 import { Service } from "typedi";
-import { HttpException } from "../services/httpException";
+import { HttpException } from "../exceptions/httpException";
 import * as dotenv from "dotenv";
 require("express-async-errors")
 
@@ -11,9 +11,7 @@ export class DataAccessLayer {
     private cluster:    Cluster | null = null;
     private bucket:     Bucket | null  = null;
 
-    constructor() {
-        console.log('DataAccessLayer() instance created')
-    }
+    constructor() {}
 
     async init() {
         const connectOptions: ConnectOptions = {

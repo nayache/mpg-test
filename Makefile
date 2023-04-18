@@ -3,7 +3,7 @@
 start: 
 	docker-compose up --build
 
-start detach:
+detach:
 	docker-compose up --build -d
 	@echo "\e[32m\nmpg server is running on background!\e[0m"
 
